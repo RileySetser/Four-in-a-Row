@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Four in a Row</title>
+    <script type="text/javascript" src="phaser.min.js"></script>
+
+    <script>
+      if('geolocation' in navigator){
+        console.log('geolocation available');
+        navigator.geolocation.getCurrentPosition(position => {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        document.getElementById('latitude').textContent = lat;
+        document.getElementById('longitude').textContent = long;
+
+       var promiseWeather = fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=9d6cc86e1bd79488be0c201aa919b1db`)
+          .then((r) => r.json())
+          .then((r) => r.weather);  
+          
+          
+        async function getWeather(promise){
+          var curWeather = await promise;
+          return curWeather;
+        }
+        var weather = getWeather(promiseWeather);
+          document.getElementById('weather').textContent = weather;
+          
+          console.log(weather);
+      });
+      }
+      else{
+        console.log('geolocation not available');
+      }
+
+    </script>
+  </head>
+  <body>
+    <p>
+      latitude: <span id="latitude"></span>&deg;<br />
+      longitude: <span id="longitude"></span>&deg;<br />
+      Weather: <span id="weather"></span><br />
+    </p> <br>
+    <div id="startSection">
+      <form id="playerSelect">
+        <select id="players">
+          <option value="single">Singleplayer</option>
+          <option value="multi">Multiplayer</option>
+        </select>
+        <input type="submit" value="Play!">
+      </form>
+      <br></div>
+    <div id="playerTurn" hidden="true"></div><br>
+    <button type="button" id="restart" hidden="true">Restart</button><br>
+    <script type="text/javascript" src="game.js"></script>
+  </body>
+</html>
