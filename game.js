@@ -127,6 +127,7 @@ function getScore(board, player) {
     return score;
 }
 
+// AI code created by iammanish17
 function miniMax(board, depth, alpha, beta, player) {
     // Minimax Algorithm for AI to recursively find an optimal move
     if (isWinner(board, 2)) return [-1, 99999999];
@@ -186,6 +187,7 @@ function miniMax(board, depth, alpha, beta, player) {
         return [col, value];
     }
 }
+// End of AI code
 
 function create() {
     initBoard();
