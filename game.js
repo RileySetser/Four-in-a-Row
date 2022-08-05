@@ -92,7 +92,6 @@ function boardFull(board) {
     return true;
 }
 
-// AI code created by iammanish17
 function sectionScore(section, player) {    
     // Assigns a score to a section based on how likely player is to win/lose
     var score = 0;          
@@ -187,7 +186,6 @@ function miniMax(board, depth, alpha, beta, player) {
         return [col, value];
     }
 }
-// End of AI code
 
 function create() {
     initBoard();
